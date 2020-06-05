@@ -23,7 +23,14 @@ def home():
 @app.route('/new', methods = ['POST', 'GET'])
 def create_buggy():
   if request.method == 'GET':
-    return render_template("buggy-form.html")
+    
+     con = sql.connect(DATABASE_FILE)
+     con.row_factory = sql.Row
+     cur = con.cursor()
+     cur.execute("SELECT * FROM buggies")
+     record = cur.fetchone();
+
+     return render_template("buggy-form.html", buggy = record)
   elif request.method == 'POST':
     msg=""
 

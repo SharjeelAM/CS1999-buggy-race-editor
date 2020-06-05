@@ -7,12 +7,12 @@
   <h1>Make buggy</h1>
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" /> <br>
+    <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }} /> <br>
     
   
    
      <label for="qty_rocket_boosters">Rocket Boosters:</label>
-    <input type="text" name="qty_rocket_boosters" />
+    <input type="text" name="qty_rocket_boosters" value={{ buggy['qty_rocket_boosters'] }} />
     <input type="submit" class="button">
   </form>
 
