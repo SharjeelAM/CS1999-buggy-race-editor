@@ -26,20 +26,26 @@ def create_buggy():
     return render_template("buggy-form.html")
   elif request.method == 'POST':
     msg=""
-    try:
-      qty_wheels = request.form['qty_wheels']
-      msg = f"qty_wheels={qty_wheels}" 
-      with sql.connect(DATABASE_FILE) as con:
-        cur = con.cursor()
-        cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
-        con.commit()
-        msg = "Record successfully saved"
-    except:
-      con.rollback()
+
+    qty_wheels = request.form['qty_wheels']
+    qty_rocket_boosters = request.form['qty_rocket_boosters']
+    #msg = f"qty_wheels={qty_wheels}"
+    #msg = f"qty_rocket_boosters={qty_rocket_boosters}"
+    if qty_wheels.isdigit()==False:
+      
       msg = "error in update operation"
-    finally:
-      con.close()
       return render_template("updated.html", msg = msg)
+    with sql.connect(DATABASE_FILE) as con:
+      cur = con.cursor()
+      cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
+      cur.execute("UPDATE buggies set qty_rocket_boosters=? WHERE id=?", (qty_rocket_boosters, DEFAULT_BUGGY_ID))
+      con.commit()
+      msg = "Record successfully saved"
+    
+    con.close()
+    return render_template("updated.html", msg = msg)
+  
+       
 
 #------------------------------------------------------------
 # a page for displaying the buggy

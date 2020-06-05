@@ -22,19 +22,22 @@ print("- Opened database successfully in file \"{}\"".format(DATABASE_FILE))
 
 # using Python's triple-quote for multi-line strings:
 
-con.execute("""
+con.execute('''
 
   CREATE TABLE IF NOT EXISTS buggies (
     id                    INTEGER PRIMARY KEY,
     qty_wheels            INTEGER DEFAULT 4,
     flag_color            VARCHAR(20),
     flag_color_secondary  VARCHAR(20),
-    flag_pattern          VARCHAR(20)
+    flag_pattern          VARCHAR(20),
+    qty_rocket_boosters   INTEGER DEFAULT 1 
   )
 
-""")
+''')
 
 print("- Table \"buggies\" exists OK")
+
+
 
 cur = con.cursor()
 
@@ -42,6 +45,7 @@ cur.execute("SELECT * FROM buggies LIMIT 1")
 rows = cur.fetchall()
 if len(rows) == 0:
   cur.execute("INSERT INTO buggies (qty_wheels) VALUES (4)")
+  cur.execute("INSERT INTO buggies (qty_rocket_boosters) VALUES (1)")
   con.commit()
   print("- Added one 4-wheeled buggy")
 else:
