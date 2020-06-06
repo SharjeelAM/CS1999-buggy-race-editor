@@ -7,19 +7,19 @@ body {
   margin: 0;
   padding: 0;
   font-size: 1.2em;
-  color: #000000;
+  color: black;
   background: repeating-linear-gradient(
     45deg,
-    #ffffee,
-    #ffffee 2em,
-    #eeeeee 2em,
-    #eeeeee 4em
+    yellow,
+    yellow 2em,
+    yellow 2em,
+    yellow 4em
   );
 }
 .main-content {
   min-height:100vh;
   padding: 1em;
-  background: white;
+  background: ;
   margin: 0 0 0 3em;
 }
 h1 {
@@ -34,8 +34,8 @@ a.button, input.button {
   margin:0.5em;
   border-radius: 0.25em;
   text-decoration: none;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: red;
   box-shadow: 5px 5px 5px #999999;
 }
 a.button:hover {
@@ -47,7 +47,7 @@ input {
   font-size:100%;
 }
 input.button {
-  background-color: #99ff99;
+  background-color: black;
 }
 table {
   border:1px solid black;
@@ -61,4 +61,9 @@ table td, table th {
 }
 .spacer {
   margin: 3em 0;
+}
+.title {font-family: 'Metal Mania', cursive;
+  text-align: center;
+  font-size: 65px;
+  
 }
