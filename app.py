@@ -35,14 +35,14 @@ def create_buggy():
     msg=""
 
     qty_wheels = request.form['qty_wheels']
-    qty_rocket_boosters = request.form['qty_rocket_boosters']
+    power_units = request.form['power_units']
     try:
       int(qty_wheels)
-      int(qty_rocket_boosters)
+      int(power_units)
       with sql.connect(DATABASE_FILE) as con:
         cur = con.cursor()
         cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
-        cur.execute("UPDATE buggies set qty_rocket_boosters=? WHERE id=?", (qty_rocket_boosters, DEFAULT_BUGGY_ID))
+        cur.execute("UPDATE buggies set power_units=? WHERE id=?", (power_units, DEFAULT_BUGGY_ID))
         con.commit()
         msg = "Record successfully saved"
 

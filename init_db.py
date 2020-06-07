@@ -30,7 +30,7 @@ con.execute('''
     flag_color            VARCHAR(20),
     flag_color_secondary  VARCHAR(20),
     flag_pattern          VARCHAR(20),
-    qty_rocket_boosters   INTEGER DEFAULT 1 
+    power_units           INTEGER DEFAULT 1 
   )
 
 ''')
@@ -45,7 +45,7 @@ cur.execute("SELECT * FROM buggies LIMIT 1")
 rows = cur.fetchall()
 if len(rows) == 0:
   cur.execute("INSERT INTO buggies (qty_wheels) VALUES (4)")
-  cur.execute("INSERT INTO buggies (qty_rocket_boosters) VALUES (1)")
+  cur.execute("INSERT INTO buggies (power_units) VALUES (1)")
   con.commit()
   print("- Added one 4-wheeled buggy")
 else:
