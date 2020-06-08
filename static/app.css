@@ -67,3 +67,19 @@ table td, table th {
   font-size: 65px;
   
 }
+
+.warning {
+  font-family: 'Piedra', cursive;
+  color: #0003c0;
+  font-size: 55px;
+  text-align: center;
+
+}
+
+.right{
+  margin: auto;
+  width: 50%;
+  font-size: 20PX;
+  
+  
+}

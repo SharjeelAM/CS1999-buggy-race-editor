@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <h1>Buggy</h1>
+  <h1 class="title">Buggy</h1>
 
   <table>
    <tr>
@@ -14,10 +14,16 @@
    <tr>
      <td>Number of Power Units:</td> <td> {{ buggy['power_units'] }} </td>
     </tr>
+    <tr>
+      <td>Power Type:</td> <td> {{ buggy['power_type'] }} </td>
+     </tr>
+     <tr>
+      <td>Buggy Cost:</td> <td> {{ buggy['buggy_cost'] }} </td>
+     </tr>
   </table>
 
   <p>
-    <a href="/" class="button">home</a>
+    <a href="/" class="button">Home</a>
   </p>
 
 {% endblock %}

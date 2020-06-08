@@ -4,20 +4,44 @@
 
 {% block content %}
 
-  <h1>Make buggy</h1>
+  <h1 class="title">Make buggy</h1>
   <form action="/new" method="post">
+   
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }} /> <br>
+    <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }} /> 
+    <br>
+    
+
+    <br>
     
   
-   
+    
      <label for="power_units">Number of Power Units:</label>
-    <input type="text" name="power_units" value={{ buggy['power_units'] }} />
-    <input type="submit" class="button">
+     <input type="text" name="power_units" value={{ buggy['power_units'] }} /> <br>
+    <br>
+    
+    
+    <label for="power_type">Power Type:</label>
+    <select type="text" name="power_type" value={{ buggy['power_type'] }} >
+      <option>petrol</option>
+      <option>fusion</option>
+      <option>steam</option>
+      <option>bio</option>
+      <option>electric</option>
+      <option>rocket</option>
+      <option>hamster</option>
+      <option>thermo</option>
+      <option>solar</option>
+      <option>wind</option>
+    </select>
+
+    <br>
+    
+    
+    
+    <a href="/" class="button">Home</a>   <input type="submit" class="button">  
   </form>
 
-  <p>
-    <a href="/" class="button">home</a>
-   </p>
+
 {% endblock %}
  
