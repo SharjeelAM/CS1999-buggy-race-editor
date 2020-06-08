@@ -7,7 +7,7 @@
   <h1 class="title">Make buggy</h1>
   <form action="/new" method="post">
    
-    <label for="qty_wheels">Number of wheels:</label>
+    <label for="qty_wheels">*Number of wheels:</label>
     <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }} /> 
     <br>
     
@@ -16,7 +16,7 @@
     
   
     
-     <label for="power_units">Number of Power Units:</label>
+     <label for="power_units">*Number of Power Units:</label>
      <input type="text" name="power_units" value={{ buggy['power_units'] }} /> <br>
     <br>
     
@@ -36,12 +36,17 @@
     </select>
 
     <br>
+
+     <br><label for="flag_color">Flag Color:</label>
+     <input type="text" name="flag_color" value={{ buggy['flag_color'] }} /> <br>
+    <br>
     
     
     
-    <a href="/" class="button">Home</a>   <input type="submit" class="button">  
+    
+    <a href="/" class="button">Home</a>   <input type="submit" class="button">
   </form>
-
-
+<br>
+*Form must be filled
 {% endblock %}
  
