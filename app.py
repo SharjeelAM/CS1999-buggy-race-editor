@@ -36,23 +36,45 @@ def create_buggy():
 
     qty_wheels = request.form['qty_wheels']
     power_units = request.form['power_units']
-    try:
-      int(qty_wheels)
-      int(power_units)
-      with sql.connect(DATABASE_FILE) as con:
-        cur = con.cursor()
-        cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
-        cur.execute("UPDATE buggies set power_units=? WHERE id=?", (power_units, DEFAULT_BUGGY_ID))
-        con.commit()
-        msg = "Record successfully saved"
+    power_type = request.form['power_type']
 
-      con.close()
-      return render_template("updated.html", msg = msg)
-    except:
-      msg = "error in update operation"
-      return render_template("updated.html", msg = msg)
+    p_type=["petrol", "fusion", "steam", "bio", "electric", "rocket", "hamster", "thermo", "solar", "wind"]
+    prices = {"petrol":4, "fusion":400, "steam":3, "bio":5, "electric":20, "rocket":16, "hamster":3, "thermo":300, "solar":40, "wind":20}
   
-       
+    
+    if qty_wheels.isdigit() == True:
+      if power_units.isdigit() == True:
+        if int(qty_wheels) >= 4 and int(qty_wheels) % 2 == 0:
+          
+          with sql.connect(DATABASE_FILE) as con:
+            cur = con.cursor()
+            cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
+            cur.execute("UPDATE buggies set power_units=? WHERE id=?", (power_units, DEFAULT_BUGGY_ID))
+            cur.execute("UPDATE buggies set power_type=? WHERE id=?", (power_type, DEFAULT_BUGGY_ID))
+           
+            buggy_cost = prices.get(power_type)*int(power_units)
+            cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, DEFAULT_BUGGY_ID))
+            
+            con.commit()
+            msg = "Record successfully saved"
+
+          con.close()
+          return render_template("updated.html", msg = msg)
+          
+  
+        else:
+          msg = "Number of wheels has to be even and above or equal to 4"
+          return render_template("updated.html", msg = msg)
+
+      else:
+        msg = "Number of power units has to be an integer"
+        return render_template("updated.html", msg = msg)
+
+    else:
+        msg = "Number of wheels has to be an integer"
+        return render_template("updated.html", msg = msg)
+  
+
 
 #------------------------------------------------------------
 # a page for displaying the buggy
