@@ -114,12 +114,6 @@ def create_buggy():
     else:
       msg = "Number of wheels has to be an integer"
       return render_template("updated.html", msg = msg)
-  
-    '''if flag_color == "":
-      random_color = random.choice(color)
-      with sql.connect(DATABASE_FILE) as con:
-              cur = con.cursor()
-              cur.execute("UPDATE buggies set flag_color=? WHERE id=?", (random_color, DEFAULT_BUGGY_ID))'''
 
 
 #------------------------------------------------------------
