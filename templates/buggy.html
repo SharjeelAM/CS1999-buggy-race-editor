@@ -24,6 +24,11 @@
      <tr>
       <td>Buggy Cost:</td> <td> {{ buggy['buggy_cost'] }} </td> <br>
      </tr>
+     <table>
+      <tr>
+        <td class=h3 bgcolor="{{ buggy['flag_color'] }}"> </td>
+      </tr>
+    </table>
     
     <br>
       <td colspan="2" class="table"> <a href="/edit/ {{ buggy['id'] }}" class="button">Edit me</a>  <a href="/delete/ {{ buggy['id'] }}" class="button">Delete</a> <a href="/json/ {{ buggy['id'] }}" class="button">Get JSON</a></td>
@@ -34,6 +39,4 @@
   <p>
     <a href="/" class="button">Home</a>
   </p>
-
-
 {% endblock %}

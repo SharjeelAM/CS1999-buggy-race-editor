@@ -10,10 +10,10 @@ body {
   color: black;
   background: repeating-linear-gradient(
     45deg,
-    yellow,
-    yellow 2em,
-    yellow 2em,
-    yellow 4em
+    rgb(171, 221, 190),
+    rgb(171, 221, 190) 2em,
+    rgb(171, 221, 190) 2em,
+    rgb(171, 221, 190) 4em
   );
 }
 .main-content {
@@ -35,7 +35,7 @@ a.button, input.button {
   border-radius: 0.25em;
   text-decoration: none;
   background-color: black;
-  color: red;
+  color: rgb(228, 170, 84);
   box-shadow: 5px 5px 5px #999999;
 }
 a.button:hover, input.button:hover {
@@ -60,6 +60,7 @@ table td, table th {
   padding: 0.5rem;
 }
 .spacer {
+  text-align: center;
   margin: 3em 0;
 }
 .title {font-family: 'Metal Mania', cursive;
@@ -70,7 +71,7 @@ table td, table th {
 
 .warning {
   font-family: 'Piedra', cursive;
-  color: #0003c0;
+  color: #df6262;
   font-size: 55px;
   text-align: center;
 
@@ -80,6 +81,15 @@ table td, table th {
   margin: auto;
   width: 50%;
   font-size: 20PX;
+
+}
+
+.table{
+  border: none;
+}
+
+.h3{
   
-  
+  height: 200px;
+  width: 400px;
 }
