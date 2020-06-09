@@ -153,12 +153,12 @@ def edit_buggy(buggy_id):
 #   using it because we'll be dipping diectly into the
 #   database
 #------------------------------------------------------------
-@app.route('/json')
-def summary():
+@app.route('/json/<buggy_id>')
+def summary(buggy_id):
   con = sql.connect(DATABASE_FILE)
   con.row_factory = sql.Row
   cur = con.cursor()
-  cur.execute("SELECT * FROM buggies WHERE id=? LIMIT 1", (DEFAULT_BUGGY_ID))
+  cur.execute("SELECT * FROM buggies WHERE id=? LIMIT 1", (buggy_id,))
   return jsonify(
       {k: v for k, v in dict(zip(
         [column[0] for column in cur.description], cur.fetchone())).items()
