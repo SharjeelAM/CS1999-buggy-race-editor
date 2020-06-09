@@ -38,69 +38,82 @@ def create_buggy():
     color = ["White", "Black", "Blue", "Red", "Green", "Yellow", "Pink", "Purple",]
     p_type=["petrol", "fusion", "steam", "bio", "electric", "rocket", "hamster", "thermo", "solar", "wind"]
     prices = {"petrol":4, "fusion":400, "steam":3, "bio":5, "electric":20, "rocket":16, "hamster":3, "thermo":300, "solar":40, "wind":20}
+    non_consumable = ["fusion", "thermo", "solar", "wind"]
   
     
     if qty_wheels.isdigit() == True:
       if power_units.isdigit() == True:
           if int(qty_wheels) >= 4 and int(qty_wheels) % 2 == 0:
-            if flag_color != "":
-              if flag_color in color:
-                
-                with sql.connect(DATABASE_FILE) as con:
-                  cur = con.cursor()
-                  if buggy_id.isdigit():
-                    cur.execute("UPDATE buggies set qty_wheels=?, power_units=?, power_type=?, flag_color=? WHERE id=?", 
-                    (qty_wheels, power_units, power_type, flag_color, buggy_id))
-                    
+            if power_type in p_type:
+              if power_type in non_consumable and int(power_units) <= 1:
+                if flag_color != "":
+                  if flag_color in color:
+                    with sql.connect(DATABASE_FILE) as con:
+                      cur = con.cursor()
+                      if buggy_id.isdigit():
+                        cur.execute("UPDATE buggies set qty_wheels=?, power_units=?, power_type=?, flag_color=? WHERE id=?", 
+                        (qty_wheels, power_units, power_type, flag_color, buggy_id))
+                        
+                      
+                      
+                        buggy_cost = prices.get(power_type)*int(power_units)
+                        cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, buggy_id))
+                      else:
+                        buggy_cost = prices.get(power_type)*int(power_units)
+                        cur.execute("INSERT INTO buggies (qty_wheels, power_units, power_type, flag_color, buggy_cost) VALUES (?,?,?,?,?)", 
+                        (qty_wheels, power_units, power_type, flag_color, buggy_cost,))
+                        
+                      
+                      
+
+
+                      con.commit()
+                      msg = "Record successfully saved"
+
+                    con.close()
+                    return render_template("updated.html", msg = msg)
+
                   
-                  
-                    buggy_cost = prices.get(power_type)*int(power_units)
-                    cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, buggy_id))
+
                   else:
-                    buggy_cost = prices.get(power_type)*int(power_units)
-                    cur.execute("INSERT INTO buggies (qty_wheels, power_units, power_type, flag_color, buggy_cost) VALUES (?,?,?,?,?)", 
-                    (qty_wheels, power_units, power_type, flag_color, buggy_cost,))
-                    
-                  
-                  
+                    msg = "Flag Color is not valid"
+                    return render_template("updated.html", msg = msg)
+
+                else:
+                  random_color = random.choice(color)
+                  with sql.connect(DATABASE_FILE) as con:
+                      cur = con.cursor()
+                      if buggy_id.isdigit():
+                        cur.execute("UPDATE buggies set qty_wheels=?, power_units=?, power_type=?, flag_color=? WHERE id=?", 
+                        (qty_wheels, power_units, power_type, random_color, buggy_id))
+                        
+                      
+                      
+                        buggy_cost = prices.get(power_type)*int(power_units)
+                        cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, buggy_id))
+                      else:
+                        buggy_cost = prices.get(power_type)*int(power_units)
+                        cur.execute("INSERT INTO buggies (qty_wheels, power_units, power_type, flag_color, buggy_cost) VALUES (?,?,?,?,?)", 
+                        (qty_wheels, power_units, power_type, random_color, buggy_cost,))
+                        
+                      
+                      
 
 
-                  con.commit()
-                  msg = "Record successfully saved"
+                      con.commit()
+                      msg = "Buggy Updated: Autofill has been implemented on blank forms"
 
-                con.close()
-                return render_template("updated.html", msg = msg)
+                  con.close()
+                  return render_template("updated.html", msg = msg)
 
               else:
-                msg = "Flag Color is not valid"
+                msg= "You can only have one unit of non-consumable power"
                 return render_template("updated.html", msg = msg)
 
             else:
-              random_color = random.choice(color)
-              with sql.connect(DATABASE_FILE) as con:
-                  cur = con.cursor()
-                  if buggy_id.isdigit():
-                    cur.execute("UPDATE buggies set qty_wheels=?, power_units=?, power_type=?, flag_color=? WHERE id=?", 
-                    (qty_wheels, power_units, power_type, random_color, buggy_id))
-                    
-                  
-                  
-                    buggy_cost = prices.get(power_type)*int(power_units)
-                    cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, buggy_id))
-                  else:
-                    buggy_cost = prices.get(power_type)*int(power_units)
-                    cur.execute("INSERT INTO buggies (qty_wheels, power_units, power_type, flag_color, buggy_cost) VALUES (?,?,?,?,?)", 
-                    (qty_wheels, power_units, power_type, random_color, buggy_cost,))
-                    
-                  
-                  
-
-
-                  con.commit()
-                  msg = "Buggy Updated: Autofill has been implemented on blank forms"
-
-              con.close()
+              msg= "Not a valid power type"
               return render_template("updated.html", msg = msg)
+
 
     
           else:
