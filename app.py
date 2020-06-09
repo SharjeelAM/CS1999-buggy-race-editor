@@ -25,13 +25,7 @@ def home():
 def create_buggy():
   if request.method == 'GET':
 
-     con = sql.connect(DATABASE_FILE)
-     con.row_factory = sql.Row
-     cur = con.cursor()
-     cur.execute("SELECT * FROM buggies")
-     record = cur.fetchone();
-
-     return render_template("buggy-form.html", buggy = record)
+     return render_template("buggy-form.html", buggy= None)
   elif request.method == 'POST':
     msg=""
 
@@ -39,6 +33,7 @@ def create_buggy():
     power_units = request.form['power_units']
     power_type = request.form['power_type']
     flag_color = request.form['flag_color']
+    buggy_id = request.form['id']
     
     color = ["White", "Black", "Blue", "Red", "Green", "Yellow", "Pink", "Purple",]
     p_type=["petrol", "fusion", "steam", "bio", "electric", "rocket", "hamster", "thermo", "solar", "wind"]
@@ -53,14 +48,23 @@ def create_buggy():
                 
                 with sql.connect(DATABASE_FILE) as con:
                   cur = con.cursor()
-                  cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
-                  cur.execute("UPDATE buggies set power_units=? WHERE id=?", (power_units, DEFAULT_BUGGY_ID))
-                  cur.execute("UPDATE buggies set power_type=? WHERE id=?", (power_type, DEFAULT_BUGGY_ID))
-                  cur.execute("UPDATE buggies set flag_color=? WHERE id=?", (flag_color, DEFAULT_BUGGY_ID))
-                
-                  buggy_cost = prices.get(power_type)*int(power_units)
-                  cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, DEFAULT_BUGGY_ID))
+                  if buggy_id.isdigit():
+                    cur.execute("UPDATE buggies set qty_wheels=?, power_units=?, power_type=?, flag_color=? WHERE id=?", 
+                    (qty_wheels, power_units, power_type, flag_color, buggy_id))
+                    
                   
+                  
+                    buggy_cost = prices.get(power_type)*int(power_units)
+                    cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, buggy_id))
+                  else:
+                    buggy_cost = prices.get(power_type)*int(power_units)
+                    cur.execute("INSERT INTO buggies (qty_wheels, power_units, power_type, flag_color, buggy_cost) VALUES (?,?,?,?,?)", 
+                    (qty_wheels, power_units, power_type, flag_color, buggy_cost,))
+                    
+                  
+                  
+
+
                   con.commit()
                   msg = "Record successfully saved"
 
@@ -72,22 +76,32 @@ def create_buggy():
                 return render_template("updated.html", msg = msg)
 
             else:
-                  random_color = random.choice(color)
-                  with sql.connect(DATABASE_FILE) as con:
-                    cur = con.cursor()
-                    cur.execute("UPDATE buggies set qty_wheels=? WHERE id=?", (qty_wheels, DEFAULT_BUGGY_ID))
-                    cur.execute("UPDATE buggies set power_units=? WHERE id=?", (power_units, DEFAULT_BUGGY_ID))
-                    cur.execute("UPDATE buggies set power_type=? WHERE id=?", (power_type, DEFAULT_BUGGY_ID))
-                    cur.execute("UPDATE buggies set flag_color=? WHERE id=?", (random_color, DEFAULT_BUGGY_ID))
-
+              random_color = random.choice(color)
+              with sql.connect(DATABASE_FILE) as con:
+                  cur = con.cursor()
+                  if buggy_id.isdigit():
+                    cur.execute("UPDATE buggies set qty_wheels=?, power_units=?, power_type=?, flag_color=? WHERE id=?", 
+                    (qty_wheels, power_units, power_type, random_color, buggy_id))
+                    
+                  
+                  
                     buggy_cost = prices.get(power_type)*int(power_units)
-                    cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, DEFAULT_BUGGY_ID))
+                    cur.execute("UPDATE buggies set buggy_cost=? WHERE id=?", (buggy_cost, buggy_id))
+                  else:
+                    buggy_cost = prices.get(power_type)*int(power_units)
+                    cur.execute("INSERT INTO buggies (qty_wheels, power_units, power_type, flag_color, buggy_cost) VALUES (?,?,?,?,?)", 
+                    (qty_wheels, power_units, power_type, random_color, buggy_cost,))
+                    
+                  
+                  
 
-                    con.commit()
-                    msg= "Record Updated: Autofill has been implemented for blank forms"
 
-                  con.close()
-                  return render_template("updated.html", msg = msg)      
+                  con.commit()
+                  msg = "Buggy Updated: Autofill has been implemented on blank forms"
+
+              con.close()
+              return render_template("updated.html", msg = msg)
+
     
           else:
             msg = "Number of wheels has to be even and minimum of 4"
@@ -117,15 +131,20 @@ def show_buggies():
   con.row_factory = sql.Row
   cur = con.cursor()
   cur.execute("SELECT * FROM buggies")
-  record = cur.fetchone(); 
-  return render_template("buggy.html", buggy = record)
+  records = cur.fetchall(); 
+  return render_template("buggy.html", buggies = records)
 
 #------------------------------------------------------------
 # a page for displaying the buggy
 #------------------------------------------------------------
-@app.route('/new')
-def edit_buggy():
-  return render_template("buggy-form.html")
+@app.route('/edit/<buggy_id>')
+def edit_buggy(buggy_id):
+  con = sql.connect(DATABASE_FILE)
+  con.row_factory = sql.Row
+  cur = con.cursor()
+  cur.execute("SELECT * FROM buggies WHERE id=?", (buggy_id,))
+  record = cur.fetchone();
+  return render_template("buggy-form.html", buggy=record)
 
 
 #------------------------------------------------------------
@@ -159,7 +178,7 @@ def delete_buggy():
     msg = "deleting buggy"
     with sql.connect(DATABASE_FILE) as con:
       cur = con.cursor()
-      cur.execute("DELETE FROM buggies")
+      cur.execute("DELETE FROM buggiesWHERE id=buggy_id")
       con.commit()
       msg = "Buggy deleted"
   except:

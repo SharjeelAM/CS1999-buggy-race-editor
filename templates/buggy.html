@@ -3,7 +3,7 @@
 {% block content %}
 
   <h1 class="title">Buggy</h1>
-
+ {% for buggy in buggies %}
   <table>
    <tr>
      <td>ID:</td> <td> {{ buggy['id'] }} </td>
@@ -23,8 +23,9 @@
      <tr>
       <td>Buggy Cost:</td> <td> {{ buggy['buggy_cost'] }} </td>
      </tr>
+      <td colspan="2"> <a href="/edit/ {{ buggy['id'] }}" class="button">Edit me</a>        <a href="/delete" class="button">Delete</a></td>
   </table>
-
+{% endfor %}
   <p>
     <a href="/" class="button">Home</a>
   </p>

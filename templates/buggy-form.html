@@ -4,11 +4,24 @@
 
 {% block content %}
 
-  <h1 class="title">Make buggy</h1>
+  <h1 class="title">
+    {% if buggy %}
+    Edit buggy #{{ buggy['id']}}
+    {% else %}
+    Make Buggy
+    {% endif %}
+  
+  
+  </h1>
   <form action="/new" method="post">
-   
+  
+    
+    <input type="hidden" name="id" value="{{ buggy['id']}}"/>
+    
+    
+    
     <label for="qty_wheels">*Number of wheels:</label>
-    <input type="text" name="qty_wheels" value={{ buggy['qty_wheels'] }} /> 
+    <input type="text" name="qty_wheels" value="{{ buggy['qty_wheels'] }}" /> 
     <br>
     
 
@@ -17,12 +30,12 @@
   
     
      <label for="power_units">*Number of Power Units:</label>
-     <input type="text" name="power_units" value={{ buggy['power_units'] }} /> <br>
+     <input type="text" name="power_units" value="{{ buggy['power_units'] }}" /> <br>
     <br>
     
     
     <label for="power_type">Power Type:</label>
-    <select type="text" name="power_type" value={{ buggy['power_type'] }} >
+    <select type="text" name="power_type" value="{{ buggy['power_type'] }}"} >
       <option>petrol</option>
       <option>fusion</option>
       <option>steam</option>
@@ -38,7 +51,7 @@
     <br>
 
      <br><label for="flag_color">Flag Color:</label>
-     <input type="text" name="flag_color" value={{ buggy['flag_color'] }} /> <br>
+     <input type="text" name="flag_color" value="{{ buggy['flag_color'] }}" /> <br>
     <br>
     
     
