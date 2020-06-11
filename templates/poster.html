@@ -1,5 +1,16 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% block content %}
+<h1 class="title">
+  Poster
+</h1>
+
+<p>
+  <a href="/" class="button">Home</a>
+</p>
+
+<h3 class="img">
+<img src="./static/buggy.gif";class="img">
+</h3>
 
 <style>
   .cs1999-tasks {
@@ -7,29 +18,48 @@
     margin-top: 4em;
   }
   .cs1999-tasks .task {
+    color: yellow;
     margin: 1em;
     padding: 1em;
-    border: 1px solid black;
+    border: 1px solid rgb(161, 0, 161);
   }
   .cs1999-tasks .task h2 {
     border-bottom: 3px solid gray;
   }
+  .title2{
+    font-family: 'Rock Salt', cursive;
+    color: rgb(161, 0, 161);
+    margin: 1em;
+    text-align: center;
+    
+  }
+  .para{
+    color: yellow;
+    margin: 1em;
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  
+  }
 </style>
 
-<!-- see tech note about the poster:  
-      https://rhul-cs-projects.github.io/CS1999-buggy-race-server/                -->
-<!--                                                                              -->
-<!-- anything you want here: make it beautiful! make it appealing! make it clear! -->
-<!-- you can drop images into static/assets if you want... and access them        -->
-<!-- here with <img src="/static/image-filename.png" alt="diagram" />             -->
-<!--                                                                              -->
-<!-- Of course you can edit static/app.css too if you want. It's your webserver,  -->
-<!--                                                                              -->
-<!-- Maybe... delete all these comments too :-)                                   -->
+<section>
+<div>
+  <h2 class="title2">
+  Why you should use my buggy editor:
+</h2>
+<p class="para">
+  My Buggy Editor allows you to choose a RANGE of power types!!<br>
+  Want a nuclear reactor as a power type???<br>
+  Well you can have it! Out run those pesks with the power of fusion!! <br>
+  Is one buggy not enough? Do you want to make as many buggies as you want?<br>
+  Of course you can! With this buggy editor you can make buggies, edit buggies and, if you dont like them, delete buggies!!!<br>
+  Don't forget you can also allow your buggy to race weilding a flag to strike fear into the hearts of your enemies!<br>
+  Pick from a variety of colours to represent your amazing buggy!!
 
-
-<!-- below this point keep this section tag and paste in a <div> for every        -->
-<!-- task you attempted.                                                          -->
+</p>
+</div>
+</section>
 
 <section class="cs1999-tasks">
 
@@ -46,8 +76,207 @@
     </p>
   </div>
 
+  <div class="task">
+    <h2>0-RUN Get app running and view it in a browser</h2>
+    <p>
+      I added a virtual enviroment and used <code> ./venv/Scripts/pip install flask </code> to install flask 
+      and then run the webserver using <code>./venv/Scripts/python app.py</code>, after activating flask. 
+    </p>
+    <p>
+      This was particulary different for me as I was told to just enter <code>pip install flask </code> to
+      install flask and <code> python3 app.py </code> to run the webserver. I had to enter my virtual enviroment manually
+      to work these commands which was unual.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>0-CHANGE Make a change to a template and see it appear</h2>
+    <p>
+      I changed the title of the buggy editor from "My Buggy Editor" to "Sharjeel's Buggy Editor" by going into the "index.html" template.
+    </p>
+    <p>
+      <!-- sentence(s) on anything interesting/incomplete you did -->
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>1-ADD Add more data to the form</h2>
+    <p>
+      I added "Number of Rocket Boosters" to the form (Which I later changed to "Number of Power Units" after realising there was a spec that had to be used).
+    </p>
+    <p>
+      First, I added the new data to "buggy-form.html" page and added a section for rocket boosters in the table in "buggy.html". At first I thought that was all I had to do.
+      After it didnt work, I realised there was an "app.py" I could edit. I followed the same pattern as was shown for Quantity of Wheels. It still didnt work which was when I saw the "init_db.py" file.
+      I edited the file, again following the same pattern for quantity of wheel. I ran it but the new data still didnt work. The final thing I had to do which I thought
+      was unusal is I had to delete the old "database.db" file before I could create a new one".
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>1-VALID Add basic data validation</h2>
+    <p>
+      I just added <code> int(qty_wheels) </code> and <code> int(power_units) </code> before the try/except statement.
+    </p>
+    <p>
+      At first I added if statements using <code>.isdigit()</code> but the webserver always returned the error saying that no return statement was
+      found so I changed my method.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>1-STYLE Style your editor just how you like it</h2>
+    <p>
+      I useed the "app.css" file to change the background colour and the colour of the buttons. I also imported some fonts to chaange the look of the titles.
+    </p>
+    <p>
+      <!-- sentence(s) on anything interesting/incomplete you did -->
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-EDIT Edit the record by loading its current values into the form</h2>
+    <p>
+      I added the value from "buggy.html" to each of the data forms in the "buggy-form.html" template. I then copy and pasted 
+      a section from the "show_buggies()" function in "app.py" and pasted it in the "create_buggy()" function just before it returned the create buggy template. This fetches
+      the data previously entered into the form from the database and will add return it to the values now in "buggy-form.html".
+    </p>
+    <p>
+      <!-- sentence(s) on anything interesting/incomplete you did -->
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-FORM Make the form better</h2>
+    <p>
+      I added a hint to the form telling the users which fields must be filled so they don't run into any errors.
+    </p>
+    <p>
+      <!-- sentence(s) on anything interesting/incomplete you did -->
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-COST Calculate and save the game cost of the buggy</h2>
+    <p>
+      I added the data of buggy_cost into my data base and added a spot for buggy cost on my buggy table. 
+      I created a dictionary for my Power Types which included the power type and it's price. Then I added the code to calculate the cost of the buggyusing power types 
+      and power units which was <code>buggy_cost = prices.get(power_type)*int(power_units)</code>. I then added code which updated the database using th samemethod as I used for my other data.
+
+    </p>
+    <p>
+      At first I put this code with my inital section which added the data to the database, but it didn't work.
+      This was because the data needed to calculate buggy cost had to already be in the database so I had to create a section after the first section which updated the 
+      database; so when the code the code for buggy cost ran it could collect the data from the database.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-RULES Add validation according to the game rules</h2>
+    <p>
+      To add this validation I couldn't avoid using if statements but I got the same error as before (previously stated). I then I realised it was 
+      because I had to add an else statement, with an error message that returned the "updated.html", for each if statement. After doing it started to work.
+    </p>
+    <p>
+      After adding the if/else statements I noticed that there was no need for the try/except statements so I got rid of it; My code still worked.
+      I also added a validation for non consumable power types just before submiting. The if statement which validates this code is 
+      <code> if power_type in non_consumable and int(power_units) <= 1: </code> however it should have 
+      been <code> if power_type not in non_consumable and int(power_units) >= 1:</code>. If this statement is true then it
+      carries on with the code as usual. If it's false then it displayes an error message. The incorrect code, which was submitted,
+      will show you to an error message if you do not specifically insert a non consumable power type with only one or less units of power.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-ENV Switch to using development or production environments</h2>
+    <p>
+      I just used gitBash to change enviroments. I used <code> FLASK_ENV=development ./venv/Scripts/python app.py </code>
+      and <code> FLASK_ENV=production ./venv/Scripts/python app.py </code> to change the enviroment to either development or production.
+    </p>
+    <p>
+      Initially I tried to create a .env file inside my venv but that didn't work so i resorted to gitBash.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-AUTOFILL Add auto-fill to the edit forms</h2>
+    <p>
+      I added an if statement that said if the, for example, flag colour was not empty then continue with the code as usual.
+      The else statement had the same method as the normal process to update the database however "flag_color" was replaced with "random_color"
+      which was the variable assigned to the function picking a random colour from the colours in my list.
+    </p>
+    <p>
+      I had to put the autofill if statement before the if statement validating that the colours were in the list otherwise if the form was left empty
+      it would give an error saying that it's not a valid colour.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-MULTI Allow different buggies to be created</h2>
+    <p>
+      -Change UPDATE to INSERT in "app.py"<br>
+      -Add "Edit" button to buggy table<br>
+      -Create an app route for the edit button (similar to show buggy app route)<br>
+      -edit app route for show buggy so it shows all inserted buggy tables and change variables to plural (for clarity)<br>
+      -Add if statement to "buggy.html" to compensate for variable changes<br>
+      -Add buggy id to "buggy-form.html"<br>
+      -Add the usual UPDATE method back but only run it if it passes this if statement:<code>if buggy_id.isdigit():</code><br>
+      -If it doesn't pass the if statement then it will run the INSERT method<br>
+      -Add an if statement to "buggy.html" so it changed title depending on whether you're updating or editing the buggy
+
+
+    </p>
+    <p>
+      Also add a JSON button to the buggy table and edit the JSON app route so you can see the JSON file for every buggy
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-DEL Allow buggies to be deleted</h2>
+    <p>
+      I had to add a delete button to the buggy table. Then I had to add 'GET' to the method 
+      in the delete app route. I then ran the buggy id through the delete function so it knew which buggy to delete.
+      I had to change this line of code, <code>cur.execute("DELETE FROM buggies")</code>,
+      to this <code>cur.execute("DELETE FROM buggies WHERE id=?", (buggy_id,))</code>. Then my delete button worked.
+    </p>
+    <p>
+      <!-- sentence(s) on anything interesting/incomplete you did -->
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-FLAG Display the pennant graphically</h2>
+    <p>
+      I just had to create a new table with one row and one collumn underneath the buggy table.
+      I gave that table the width of 400px and height of 200px so it resembles the shape of a flag. 
+      I then gave then entered the value for flag colour as the background colour so the isnerted flag colour would be 
+      the tables background colour. This created a flag underneath every created buggy.
+    </p>
+    <p>
+      This was simple for me because I didnt add flag pattern to my buggy form.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-TESTS Write some tests</h2>
+    <p>
+      The number of wheels and flag colour dont affect the cost so I kept these as control values throughout the testing.
+      I did manual testing. I ran a series of tests checking if the values inputed into the form would lead to the correct cost.
+      I would first calculate and record the value which should be outputed if my method for calculateing cost is correct.
+      I would then run this through my buggy editor and see if the outputed value is correct. I labled these as "Expected Cost"
+      and "Actual Cost"; Actual cost is the value outputed by my buggy editor. I ran these tests with a number of different inputed values
+      and recorded them in "TESTING.md".
+    </p>
+    <p>
+      I ran these tests before i attempted to add validation for non consumable power types.
+    </p>
+  </div>
+
 
 <!-- this closes the section: keep it in! -->
 </section>
+
+<p>
+  <a href="/" class="button">Home</a>
+</p>
 
 {% endblock %}

@@ -1,0 +1,103 @@
+html{
+  margin:0;
+  padding: 0; 
+}
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  color: black;
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 2em,
+    black 2em,
+    black 4em
+  );
+}
+.main-content {
+  min-height:100vh;
+  padding: 1em;
+  background: ;
+  margin: 0 0 0 3em;
+}
+h1 {
+  margin: 0 0 1em 0;
+}
+p {
+  margin: 1em 0;
+}
+a.button, input.button {
+  border:1px solid black;
+  padding:0.5em;
+  margin:0.5em;
+  border-radius: 0.25em;
+  text-decoration: none;
+  background-color: rgb(161, 0, 161);
+  color: rgb(228, 170, 84);
+  box-shadow: 5px 5px 5px #999999;
+}
+a.button:hover, input.button:hover {
+  background-color: yellow;
+  color:  rgb(161, 0, 161);
+}
+input {
+  padding: 0.5em;
+  font-size:100%;
+}
+input.button {
+  background-color: black;
+}
+table {
+  border:1px solid black;
+  border-collapse: collapse;
+  margin: 0 0 2em 0;
+}
+table td, table th {
+  padding: 0.25em;
+  border: 1px solid #999;
+  padding: 0.5rem;
+}
+.spacer {
+  text-align: center;
+  margin: 3em 0;
+}
+.title {font-family: 'Metal Mania', cursive;
+  text-align: center;
+  font-size: 65px;
+  color: rgb(161, 0, 161);
+  
+}
+
+.warning {
+  font-family: 'Piedra', cursive;
+  color: #df6262;
+  font-size: 55px;
+  text-align: center;
+
+}
+
+.right{
+  margin: auto;
+  width: 50%;
+  font-size: 20PX;
+
+}
+
+.table{
+  border: none;
+}
+
+.h3{
+  
+  height: 200px;
+  width: 400px;
+}
+
+.img{
+  text-align: center;
+  
+  
+  
+}
