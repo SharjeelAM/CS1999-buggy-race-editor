@@ -45,7 +45,7 @@ def create_buggy():
       if power_units.isdigit() == True:
           if int(qty_wheels) >= 4 and int(qty_wheels) % 2 == 0:
             if power_type in p_type:
-              if power_type in non_consumable and int(power_units) <= 1:
+              if power_type not in non_consumable and int(power_units) > 1:
                 if flag_color != "":
                   if flag_color in color:
                     with sql.connect(DATABASE_FILE) as con:
@@ -197,8 +197,9 @@ def delete_buggy(buggy_id):
 
 
 
-  
-  
+@app.route('/poster')
+def poster():
+  return render_template('poster.html')
   
   
   
